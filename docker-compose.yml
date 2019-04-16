@@ -27,6 +27,22 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  alertmanager:
+    image: prom/alertmanager:v0.16.2
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    restart: always
+    ports:
+      - "9093:9093"
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
   nodeexporter:
     image: prom/node-exporter:v0.17.0
     container_name: nodeexporter
