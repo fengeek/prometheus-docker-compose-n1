@@ -65,6 +65,23 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  cadvisor:
+    image: google/cadvisor:v0.33.0
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
   grafana:
     image: grafana/grafana:6.1.3
     container_name: grafana

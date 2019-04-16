@@ -4,6 +4,7 @@
 - grafana
 - pushgateway
 - alertmanager
+- cAdvisor
 
 ## pushgateway 使用
 pushgateway 是 prometheus 拉取数据的中间网关。在没有 exporter 的情况下我们可以使用 curl 或者 api 库向 pushgateway 推送
