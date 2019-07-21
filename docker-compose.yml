@@ -6,7 +6,7 @@ networks:
 
 services:
   prometheus:
-    image: prom/prometheus:v2.8.1
+    image: prom/prometheus-linux-arm64
     container_name: prometheus
     user: root
     volumes:
@@ -28,7 +28,7 @@ services:
       org.label-schema.group: "monitoring"
 
   alertmanager:
-    image: prom/alertmanager:v0.16.2
+    image: prom/alertmanager-linux-arm64
     container_name: alertmanager
     volumes:
       - ./alertmanager/:/etc/alertmanager/
@@ -44,7 +44,7 @@ services:
       org.label-schema.group: "monitoring"
 
   nodeexporter:
-    image: prom/node-exporter:v0.17.0
+    image: prom/node-exporter-linux-arm64
     container_name: nodeexporter
     user: root
     privileged: true
@@ -66,7 +66,8 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: google/cadvisor:v0.33.0
+    #image: google/cadvisor:v0.33.0
+    image: h3rj4n/cadvisor-arm
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -83,7 +84,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:6.1.3
+    image: grafana/grafana
     container_name: grafana
     user: root
     volumes:
@@ -102,7 +103,7 @@ services:
       org.label-schema.group: "monitoring"
 
   pushgateway:
-    image: prom/pushgateway:v0.7.0
+    image: prom/pushgateway-linux-arm64:master
     container_name: pushgateway
     restart: always
     ports:
